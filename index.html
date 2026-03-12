@@ -1492,7 +1492,7 @@
             cell.appendChild(box);
             grid.appendChild(cell);
             try {
-                new QRCode(box, { text: chunks[i], width: 160, height: 160, correctLevel: QRCode.CorrectLevel.L });
+                new QRCode(box, { text: chunks[i], width: 250, height: 250, correctLevel: QRCode.CorrectLevel.L });
             } catch (e) {
                 console.error(e);
                 box.innerHTML = '<p style="color:red; font-size:11px;">QRエラー</p>';
@@ -1523,7 +1523,7 @@
             features,
             { dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857', decimals: 5 }
         );
-        const round2 = (v) => Math.round(v * 100) / 100;
+        const round5 = (v) => Math.round(v * 100000) / 100000;
         const compactFeatures = [];
         if (gj.features && gj.features.length > 0) {
             gj.features.forEach(f => {
@@ -1536,7 +1536,7 @@
                     if (p[0] < minLon) minLon = p[0]; if (p[0] > maxLon) maxLon = p[0];
                     if (p[1] < minLat) minLat = p[1]; if (p[1] > maxLat) maxLat = p[1];
                 });
-                minLon = round2(minLon); maxLon = round2(maxLon); minLat = round2(minLat); maxLat = round2(maxLat);
+                minLon = round5(minLon); maxLon = round5(maxLon); minLat = round5(minLat); maxLat = round5(maxLat);
                 const poly = [[minLon, minLat], [maxLon, minLat], [maxLon, maxLat], [minLon, maxLat], [minLon, minLat]];
                 const props = f.properties || {};
                 const featName = props.name || props.名称 || props.名前 || props.Name || (layerData.name || 'layer') + ' ' + (compactFeatures.length + 1);
